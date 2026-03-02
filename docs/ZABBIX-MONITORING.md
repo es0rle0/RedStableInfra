@@ -1,9 +1,9 @@
-# Мониторинг Zabbix: доступные метрики и рекомендации
+# Мониторинг Zabbix: метрики и графики
 
 ## Обзор
 
-Каждое устройство (Raspberry Pi) с установленным Zabbix Agent 2 отправляет метрики на сервер.
-Ниже — полный список доступных items, сгруппированных по категориям, с рекомендациями по графикам.
+Zabbix Agent 2 на каждом хабе (Raspberry Pi) отправляет метрики на сервер.
+Ниже — список доступных items по категориям.
 
 ---
 
@@ -129,28 +129,26 @@
 
 ---
 
-## Рекомендуемый набор графиков для Dashboard
+## Рекомендуемые графики для Dashboard
 
-Для RedTeam-устройств (Raspberry Pi в полевых условиях) рекомендую такой набор:
+### Критичные
 
-### Обязательные (критичные для работы)
-
-1. **Agent Availability** — устройство онлайн/офлайн (agent.ping)
-2. **CPU Utilization %** — перегрузка = тормоза инструментов
+1. **Agent Availability** — онлайн/офлайн (agent.ping)
+2. **CPU Utilization %** — перегрузка процессора
 3. **Memory Utilization %** — утечки памяти, OOM
-4. **Disk Space Used %** — SD-карта заполнена = устройство мертво
-5. **System Uptime** — перезагрузки = проблемы с питанием
+4. **Disk Space Used %** — заполнение SD-карты
+5. **System Uptime** — перезагрузки (проблемы с питанием)
 
-### Полезные (для диагностики)
+### Диагностика
 
-6. **Network Traffic (tailscale0)** — VPN-трафик, видно активность
+6. **Network Traffic (tailscale0)** — VPN-трафик
 7. **Network Traffic (wlan0)** — Wi-Fi трафик
-8. **Load Average** — общая картина нагрузки
-9. **Disk I/O** — SD-карта медленная, это часто bottleneck
+8. **Load Average** — общая нагрузка
+9. **Disk I/O** — bottleneck SD-карты
 
-### Опциональные (для глубокой диагностики)
+### Расширенные
 
-10. **CPU breakdown** (user/system/iowait) — что именно грузит
+10. **CPU breakdown** (user/system/iowait)
 11. **Disk Latency** — деградация SD-карты
-12. **Network Errors** — проблемы с Wi-Fi
-13. **/etc/passwd checksum** — кто-то менял пользователей (security)
+12. **Network Errors** — проблемы Wi-Fi
+13. **/etc/passwd checksum** — контроль целостности
