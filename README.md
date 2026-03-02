@@ -59,3 +59,24 @@
 ├── CONFIGURATION.md         # Гайд по замене плейсхолдеров
 └── README.md
 ```
+
+## Документация
+
+### С чего начать
+
+1. [CONFIGURATION.md](CONFIGURATION.md) — замена плейсхолдеров на свои значения
+2. [server/INSTALL.md](server/INSTALL.md) — запуск серверного приложения
+3. [docs/BUILD-GUIDE.md](docs/BUILD-GUIDE.md) — сборка образа Raspberry Pi
+
+### Справочники
+
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — архитектура системы (схема, уровни)
+- [docs/IMAGE-CONTENTS.md](docs/IMAGE-CONTENTS.md) — что внутри образа (инструменты, сервисы)
+- [docs/HEADSCALE-GUIDE.md](docs/HEADSCALE-GUIDE.md) — команды Headscale/Tailscale
+- [docs/ZABBIX-MONITORING.md](docs/ZABBIX-MONITORING.md) — метрики мониторинга
+- [server/docs/SERVER-SETUP.md](server/docs/SERVER-SETUP.md) — развёртывание сервера (подробно)
+
+### Компоненты
+
+- [server/README.md](server/README.md) — Infra Server
+- [hub/README.md](hub/README.md) — Hub (управление периферией)

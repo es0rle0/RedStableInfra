@@ -126,7 +126,5 @@ INSERT INTO Devices VALUES ('MyKeylogger', 'keylogger', 'aa:bb:cc:dd:ee:ff');
 INSERT INTO pass VALUES ('keylogger', 'wifi_password_here');
 ```
 
-**`hub/static/images/logo.png`** — НЕ включён (бинарный файл). Положите свой логотип.
-
 ---
 
