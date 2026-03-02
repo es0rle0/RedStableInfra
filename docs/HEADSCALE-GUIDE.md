@@ -15,22 +15,6 @@ sudo systemctl status headscale
 
 # Список всех нод
 headscale nodes list
-
-# Список пользователей
-headscale users list
-```
-
-### Управление пользователями
-
-```bash
-# Создать пользователя
-headscale users create redteam
-
-# Удалить пользователя
-headscale users destroy redteam
-
-# Переименовать
-headscale users rename oldname newname
 ```
 
 ### Управление нодами
@@ -86,19 +70,6 @@ headscale preauthkeys create --user redteam --expiration 24h
 
 # Список ключей
 headscale preauthkeys list --user redteam
-```
-
-### API ключи
-
-```bash
-# Создать API ключ (для автоматизации)
-headscale apikeys create
-
-# Список API ключей
-headscale apikeys list
-
-# Отозвать ключ
-headscale apikeys expire --prefix <PREFIX>
 ```
 
 ## Tailscale (клиентская часть)
@@ -190,84 +161,4 @@ sudo tailscale up --login-server https://headscale.example.com
 ```bash
 # Одобрить ноду (если требуется)
 headscale nodes register --user redteam --key nodekey:<KEY_FROM_URL>
-```
-
-## Типичные проблемы
-
-### Нода не подключается
-
-```bash
-# Проверить статус демона
-sudo systemctl status tailscaled
-sudo journalctl -u tailscaled -f
-
-# Проверить доступность сервера
-curl -I https://headscale.example.com/health
-```
-
-### Нода "offline" но работает
-
-```bash
-# На клиенте — переподключиться
-sudo tailscale down && sudo tailscale up
-
-# На сервере — проверить последнюю активность
-headscale nodes list -o json | jq '.[] | {name: .givenName, lastSeen: .lastSeen, online: .online}'
-```
-
-### Сбросить ноду полностью
-
-На клиенте:
-```bash
-sudo tailscale logout
-sudo systemctl stop tailscaled
-sudo rm -rf /var/lib/tailscale
-sudo systemctl start tailscaled
-sudo tailscale up --login-server https://headscale.example.com --authkey <KEY>
-```
-
-На сервере (удалить старую запись):
-```bash
-headscale nodes delete --identifier <OLD_NODE_ID>
-```
-
-## ACL (Access Control Lists)
-
-Файл политики обычно в `/etc/headscale/acl.yaml` или `acl.json`.
-
-Пример минимальной политики:
-```yaml
-groups:
-  group:admin:
-    - user1
-  group:redteam:
-    - redteam
-
-tagOwners:
-  tag:server:
-    - group:admin
-  tag:client:
-    - group:redteam
-
-acls:
-  # Админы видят всё
-  - action: accept
-    src:
-      - group:admin
-    dst:
-      - "*:*"
-  
-  # Redteam видит только серверы
-  - action: accept
-    src:
-      - group:redteam
-    dst:
-      - tag:server:*
-```
-
-После изменения:
-```bash
-sudo systemctl reload headscale
-# или
-headscale policy reload
 ```
