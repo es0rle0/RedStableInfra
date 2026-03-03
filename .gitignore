@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Images
+*.img
+*.img.gz
+*.zip
+
+# Logs
+logs/
+*.log
+*.err
+
+# IDE
+.vscode/
+.idea/
+.kiro/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+
+# Artifacts
+artifacts-arm64/
