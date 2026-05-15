@@ -30,8 +30,8 @@ ZBX_ENABLE_PSK="${ZBX_ENABLE_PSK:-no}"
 HEADSCALE_SERVER="${HEADSCALE_SERVER:-}"
 HEADSCALE_USER="${HEADSCALE_USER:-}"
 HEADSCALE_PASSWORD="${HEADSCALE_PASSWORD:-}"
-HEADSCALE_CMD_JSON="${HEADSCALE_CMD_JSON:-headscale preauthkeys create --user 1 --expiration 6h -o json}"
-HEADSCALE_CMD_TEXT="${HEADSCALE_CMD_TEXT:-headscale preauthkeys create --user 1 --expiration 6h}"
+HEADSCALE_CMD_JSON="${HEADSCALE_CMD_JSON:-headscale preauthkeys create --user 1 --expiration 3h -o json}"
+HEADSCALE_CMD_TEXT="${HEADSCALE_CMD_TEXT:-headscale preauthkeys create --user 1 --expiration 3h}"
 
 [[ -n "$HEADSCALE_SERVER" && -n "$HEADSCALE_USER" && -n "$HEADSCALE_PASSWORD" ]] || {
   echo "ERROR: Set HEADSCALE_SERVER/HEADSCALE_USER/HEADSCALE_PASSWORD env vars" >&2; exit 1;
