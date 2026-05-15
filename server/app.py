@@ -462,7 +462,8 @@ def api_zabbix_host_items(hostid):
         filtered = []
         interesting_keys = [
             "system.cpu", "vm.memory", "net.if", "system.uptime",
-            "agent.ping", "system.load", "vfs.fs", "vfs.dev"
+            "agent.ping", "system.load", "vfs.fs", "vfs.dev",
+            "rpi.temperature", "rockpie.temperature", "sensor.temp"
         ]
         for item in items:
             if any(k in item.get("key_", "") for k in interesting_keys):

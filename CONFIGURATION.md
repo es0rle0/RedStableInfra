@@ -123,7 +123,7 @@ CREATE TABLE pass (
 
 -- Пример
 INSERT INTO Devices VALUES ('MyKeylogger', 'keylogger', 'aa:bb:cc:dd:ee:ff');
-INSERT INTO pass VALUES ('keylogger', 'wifi_password_here');
+INSERT INваукаукаTO pass VALUES ('keylogger', 'wifi_password_here');
 ```
 
 ---

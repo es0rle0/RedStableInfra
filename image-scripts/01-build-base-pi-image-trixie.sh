@@ -464,6 +464,16 @@ WantedBy=multi-user.target
 UNIT
 enable_unit ttyd.service multi-user.target
 
+# iptables: блокируем все входящие кроме Tailscale (безопасность на операции)
+log "Firewall: allow only Tailscale inbound"
+iptables -F INPUT
+iptables -A INPUT -i tailscale0 -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -j DROP
+mkdir -p /etc/iptables
+iptables-save > /etc/iptables/rules.v4
+
 # ponysay
 log "ponysay"
 rm -rf /tmp/ponysay
@@ -523,6 +533,8 @@ deb [arch=arm64 signed-by=/etc/apt/keyrings/zabbix.gpg] https://repo.zabbix.com/
 SRC
 apt-get update
 apt-get -y install zabbix-agent2
+install -d -m0755 /etc/zabbix/zabbix_agent2.d
+echo 'UserParameter=rpi.temperature,cat /sys/class/thermal/thermal_zone0/temp | awk "{print \$1/1000}"' > /etc/zabbix/zabbix_agent2.d/rpi-temp.conf
 enable_unit zabbix-agent2.service multi-user.target
 
 # Metasploit (official installer)
